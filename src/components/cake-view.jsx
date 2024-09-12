@@ -1,11 +1,22 @@
-import { ordered, restocked } from "@/app/features/cake/cakeSlice";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { ordered as cakeOrdered, restocked } from "@/state/slices/cakeSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const CakeView = () => {
-  const numberOfCakes = useSelector((state) => state.cake.noOfCakes);
   const dispatch = useDispatch();
+  const numberOfCakes = useSelector((state) => state.cake.noOfCakes);
+  const numberOfIceCreams = useSelector((state) => state.iceCream.noOfIceCream);
+
+  const handleOrderCake = () => {
+    if (numberOfCakes > 0) {
+      dispatch(cakeOrdered());
+      if (numberOfIceCreams > 0) {
+        return;
+      }
+    }
+  };
+
   return (
     <Card className="max-w-md">
       <CardHeader className="text-center text-2xl font-bold">
@@ -19,7 +30,7 @@ const CakeView = () => {
           <Button
             className="rounded-full"
             variant="outline"
-            onClick={() => dispatch(ordered())}
+            onClick={handleOrderCake}
           >
             Order Cake
           </Button>

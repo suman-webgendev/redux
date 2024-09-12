@@ -1,11 +1,11 @@
-import { ordered, restocked } from "@/app/features/icecream/icecreamSlice";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { ordered, restocked } from "@/state/slices/icecreamSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const IcecreamView = () => {
-  const noOfIceCream = useSelector((state) => state.iceCream.noOfIceCream);
   const dispatch = useDispatch();
+  const noOfIceCream = useSelector((state) => state.iceCream.noOfIceCream);
   return (
     <Card className="max-w-md">
       <CardHeader className="text-center text-2xl font-bold">
